@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Show</title>
+    <style>
+        /* CSS styles */
+
+        /* Gradient background animation */
+        body {
+            /* display: inline; */
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+            font-family: poppins;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Wrapper and input styles */
+        .wrapper {
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        label {
+            width: 100%;
+            max-width: 200px;
+            float: left;
+            position: relative;
+            top: 12px;
+        }
+
+        input {
+            font-size: 25px;
+            position: relative;
+            left: 100px;
+            width: 100%;
+            max-width: 320px;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 5px 5px 12px 5px;
+        }
+
+        /* Header styles */
+        h1, h2 {
+            color: aliceblue;
+            text-align: center;
+        }
+
+        /* Button styles */
+        button {
+            font-family: poppins;
+            color: #A459D1;
+            border-radius: 10%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Media query for responsive design */
+        @media only screen and (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            input {
+                max-width: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HTML content -->
+
+    <div class="wrapper">
+        <h1>"Better the feedback</h1>
+        <h1>Better the business."</h1>
+        <!-- <p>Test the user feedback using sentiment analysis</p> -->
+        <form method="post" action="{% url 'homepage' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default"><h2>Go ahead and test your tweet</h2></span>
+                <input name="text data" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <br>
+            <div class="col-auto">
+                <button type="submit" name="pred_button" value="Save&Next">Confirm Submission</button>
+            </div>
+        </form>
+        {% if result %}
+        <h2>The sentiment of the above sentence is: {{ result }}</h2>
+        {% endif %}
+    </div>
+
+</body>
+</html>
